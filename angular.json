@@ -57,6 +57,7 @@
               }
             ],
             "styles": [
+              "src/assets/themes/project-theme.css",
               "src/styles.scss"
             ],
             "scripts": []

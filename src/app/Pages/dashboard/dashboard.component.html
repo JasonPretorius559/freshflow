@@ -1,0 +1,43 @@
+<div class="dashboard-wrapper">
+
+  <header class="dashboard-header">
+    <h1>Welcome, {{ userName }}</h1>
+    <p>Warehouse Management Dashboard</p>
+  </header>
+
+  <div class="stats-grid">
+  <div class="stat-card" *ngFor="let stat of stats" [style.border-left-color]="stat.color">
+    <h2>{{ stat.value }}</h2>
+    <p>{{ stat.title }}</p>
+  </div>
+</div>
+
+  <div class="charts-section">
+    <dx-chart
+      [dataSource]="palletData"
+      title="Pallet Movements"
+      class="chart-card">
+      <dxi-series
+        argumentField="day"
+        valueField="pallets"
+        type="bar"
+        color="#22C55E">
+      </dxi-series>
+      <dxo-argument-axis>
+        <dxo-label [rotationAngle]="-45"></dxo-label>
+      </dxo-argument-axis>
+    </dx-chart>
+
+    <dx-pie-chart
+      [dataSource]="truckData"
+      title="Truck Status"
+      class="chart-card">
+      <dxi-series
+        argumentField="status"
+        valueField="count"
+        type="doughnut">
+      </dxi-series>
+    </dx-pie-chart>
+  </div>
+
+</div>

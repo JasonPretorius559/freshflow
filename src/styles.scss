@@ -1,1 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont,
+               'Segoe UI', Roboto, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.dx-overlay-content {
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 240px !important;
+}
+
+/* Toast inner content */
+.dx-toast-content {
+  padding: 6px 10px !important;
+  font-size: 13px !important;
+  line-height: 1.3;
+  border-radius: 8px;
+  white-space: normal;
+}
+
+.dx-toast.dx-toast-success .dx-toast-content {
+  background-color: #fc8894 !important;
+}
+
+.dx-toast.dx-toast-error .dx-toast-content {
+  background-color: #ef4444 !important;
+}
+
