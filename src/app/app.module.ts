@@ -1,36 +1,56 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 
-// DevExtreme imports
-import { DxButtonModule } from 'devextreme-angular';
-import { DxChartModule, DxPieChartModule } from 'devextreme-angular';
+// DevExtreme imports (merged)
+import {
+  DxButtonModule,
+  DxChartModule,
+  DxPieChartModule,
+  DxTextBoxModule,
+  DxValidatorModule,
+  DxDrawerModule,
+  DxListModule,
+  DxToolbarModule,
+  DxDrawerComponent
 
-import { DxTextBoxModule } from 'devextreme-angular';
-import { DxValidatorModule } from 'devextreme-angular';
+} from 'devextreme-angular';
+
 import { LoginComponent } from './Pages/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+
 import { DashboardComponent } from './Pages/dashboard/dashboard.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { MainLayoutComponent } from './components/main-layout/main-layout.component';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
+    SidebarComponent,
+    MainLayoutComponent,
  
     
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
+    DxDrawerModule,
     DxTextBoxModule,
     DxButtonModule,
     DxValidatorModule,
     AppRoutingModule,
     DxChartModule,
-    DxPieChartModule
+    DxPieChartModule,
+    DxListModule,
+    HttpClientModule,
+    DxToolbarModule,
+    DxDrawerComponent
+
 
     
     

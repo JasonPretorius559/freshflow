@@ -57,6 +57,7 @@
               }
             ],
             "styles": [
+              "node_modules/devextreme/dist/css/dx.common.css",
               "src/assets/themes/project-theme.css",
               "src/styles.scss"
             ],

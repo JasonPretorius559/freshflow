@@ -12,10 +12,10 @@ export class DashboardComponent implements OnInit {
 
   // Stats for DxCard
   stats = [
-    { title: 'Total Pallets', value: 1250, color: '#22C55E' },
-    { title: 'Trucks In Transit', value: 48, color: '#16A34A' },
-    { title: 'Pending Orders', value: 32, color: '#15803D' },
-    { title: 'Users', value: 12, color: '#4ADE80' },
+    { title: 'Total Pallets', value: 1250, color: '#fc8894' },
+    { title: 'Trucks In Transit', value: 48, color: '#f87171' },
+    { title: 'Pending Orders', value: 32, color: '#fb7185' },
+    { title: 'Users', value: 12, color: '#fda4af' },
   ];
 
   // Sample data for DxChart

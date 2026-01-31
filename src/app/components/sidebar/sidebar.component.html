@@ -1,0 +1,35 @@
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar" [class.collapsed]="!isOpen">
+    <div class="sidebar-header">
+      <span *ngIf="isOpen">FreshFlow</span>
+      <dx-button
+        stylingMode="text"
+        class="sidebar-toggle-btn"
+        (onClick)="toggle()">
+        <ng-container *dxTemplate="let data of 'content'">
+          <i [class]="isOpen ? 'dx-icon dx-icon-close' : 'dx-icon dx-icon-menu'"></i>
+        </ng-container>
+      </dx-button>
+    </div>
+
+    <div class="menu-list">
+      <div
+        class="menu-item"
+        [class.collapsed]="!isOpen"
+        *ngFor="let item of menuItems"
+        (click)="navigate(item)"
+        [title]="!isOpen ? item.text : ''">
+        <i [class]="'dx-icon dx-icon-' + item.icon"></i>
+        <span *ngIf="isOpen">{{ item.text }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>
