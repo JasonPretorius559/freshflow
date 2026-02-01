@@ -14,8 +14,11 @@ import {
   DxDrawerModule,
   DxListModule,
   DxToolbarModule,
-  DxDrawerComponent
-
+  DxDrawerComponent,
+  DxDataGridModule,
+  DxDropDownButtonModule,
+  DxLoadPanelModule,
+  DxPopupModule 
 } from 'devextreme-angular';
 
 import { LoginComponent } from './Pages/login/login.component';
@@ -24,8 +27,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
-
-
+import { IntakeComponent } from './Pages/intake/intake.component';
 
 @NgModule({
   declarations: [
@@ -34,8 +36,7 @@ import { MainLayoutComponent } from './components/main-layout/main-layout.compon
     DashboardComponent,
     SidebarComponent,
     MainLayoutComponent,
- 
-    
+    IntakeComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,13 +50,13 @@ import { MainLayoutComponent } from './components/main-layout/main-layout.compon
     DxListModule,
     HttpClientModule,
     DxToolbarModule,
-    DxDrawerComponent
-
-
-    
-    
+    DxDrawerComponent,
+    DxDataGridModule,
+    DxDropDownButtonModule,
+    DxLoadPanelModule,
+    DxPopupModule 
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
