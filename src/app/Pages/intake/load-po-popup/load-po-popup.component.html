@@ -1,0 +1,49 @@
+<dx-popup
+  [(visible)]="visible"
+  title="Load Purchase Order"
+  [showCloseButton]="true"
+  [dragEnabled]="false"
+  [width]="'80vw'"
+  [height]="'80vh'"
+  [wrapperAttr]="{ class: 'load-po-popup' }"
+  (onHiding)="onCancel()">
+
+  <dx-load-panel
+    [visible]="loadingPos"
+    [position]="{ of: '.dx-popup-content' }">
+  </dx-load-panel>
+
+  <div *dxTemplate="let data of 'content'" class="popup-body">
+
+    <dx-data-grid
+      [dataSource]="availablePos"
+      [columnAutoWidth]="true"
+      [showBorders]="true"
+      (onSelectionChanged)="onPoSelected($event)">
+
+      <dxo-selection mode="single"></dxo-selection>
+      <dxo-scrolling mode="virtual"></dxo-scrolling>
+
+      <dxi-column dataField="id" caption="PO #"></dxi-column>
+      <dxi-column dataField="client" caption="Client"></dxi-column>
+      <dxi-column dataField="reference" caption="Reference"></dxi-column>
+      <dxi-column dataField="status" caption="Status"></dxi-column>
+    </dx-data-grid>
+
+    <div class="load-po-footer">
+      <dx-button
+        text="Cancel"
+        stylingMode="outlined"
+        (onClick)="onCancel()">
+      </dx-button>
+
+      <dx-button
+        text="Load PO"
+        type="default"
+        [disabled]="!selectedPo"
+        (onClick)="onConfirm()">
+      </dx-button>
+    </div>
+
+  </div>
+</dx-popup>

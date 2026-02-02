@@ -1,0 +1,40 @@
+// Target the overlay wrapper (child of load-po-popup)
+::ng-deep .load-po-popup > .dx-overlay-content.dx-popup-normal {
+  max-width: 80vw !important;
+  width: 50vw !important;
+    
+}
+
+// Target the content area inside the popup
+::ng-deep .load-po-popup .dx-popup-content {
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 0 !important;
+  height: 50% !important;
+}
+
+.popup-body {
+  display: flex;
+  flex-direction: column;
+  height: 50%;
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  gap: 16px;
+}
+
+// Make the data grid take available space but not overflow
+::ng-deep .load-po-popup .dx-datagrid {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.load-po-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 16px;
+  flex-shrink: 0;
+}

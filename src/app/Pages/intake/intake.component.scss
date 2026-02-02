@@ -1,5 +1,6 @@
 .intake-page {
   padding: 16px;
+  margin: 0px;
 }
 
 .toolbar {
@@ -13,17 +14,21 @@
   margin-bottom: 23px;
 }
 
-::ng-deep .loadpo-popup {
-  .dx-overlay-content {
-    width: 1200px !important;
-  }
+.dx-list-items  .dx-item-content .dx-list-item-content{
+  width: 20px;
 }
 
-.load-po-footer {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 20px;
-  padding-top: 15px;
-  border-top: 1px solid #ddd;
-}
+// ::ng-deep .loadpo-popup {
+//   .dx-overlay-content {
+//     width: 1200px !important;
+//   }
+// }
+
+// .load-po-footer {
+//   display: flex;
+//   justify-content: flex-end;
+//   gap: 10px;
+//   margin-top: 20px;
+//   padding-top: 15px;
+//   border-top: 1px solid #ddd;
+// }

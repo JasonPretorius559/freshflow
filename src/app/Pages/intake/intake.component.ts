@@ -1,30 +1,30 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IntakeService } from '../../services/intake.service';
 import notify from 'devextreme/ui/notify';
-import { DxPopupComponent } from 'devextreme-angular';
+
 @Component({
   selector: 'app-intake',
   templateUrl: './intake.component.html',
   styleUrls: ['./intake.component.scss'],
-  standalone: false,
+  standalone: false
 })
 export class IntakeComponent implements OnInit {
-  showLoadPoModal = false;
+
+  // ---- Page State ----
+  intakes: any[] = [];
+  loading = false;
 
   availablePos: any[] = [];
   selectedPo: any = null;
   loadingPos = false;
-  intakes: any[] = [];
-  loading = false;
 
-
+  showLoadPoModal = false;
 
   @ViewChild('poFileInput') poFileInput!: ElementRef<HTMLInputElement>;
-  @ViewChild('popup') popup!: DxPopupComponent;
 
   ediOptions = [
     { id: 'load', text: 'Load PO' },
-    { id: 'upload', text: 'Upload PO' },
+    { id: 'upload', text: 'Upload PO' }
   ];
 
   constructor(private intakeService: IntakeService) {}
@@ -33,59 +33,54 @@ export class IntakeComponent implements OnInit {
     this.loadIntakes();
   }
 
-  ngAfterViewInit(): void {
-    if (this.popup) {
-      this.popup.width = 1200;
-      this.popup.height = 600;
-    }
-  }
+
+  // ---------------------------
+  // MAIN GRID
+  // ---------------------------
 
   loadIntakes() {
     this.loading = true;
 
     this.intakeService.getAll().subscribe({
-      next: (data) => {
+      next: data => {
         this.intakes = data;
         this.loading = false;
       },
-      error: (err) => {
-        console.error('Failed to load intakes', err);
+      error: err => {
+        console.error(err);
         this.loading = false;
-      },
+      }
     });
   }
 
+
+  // ---------------------------
+  // EDI ACTIONS
+  // ---------------------------
+
   onEdiAction(e: any) {
-  const action = e.itemData?.id;
+    const action = e.itemData?.id;
 
-  if (!action) return; // safety check
+    if (!action) return;
 
-  switch (action) {
-    case 'upload':
-      // open hidden file input
-      if (this.poFileInput?.nativeElement) {
-        this.poFileInput.nativeElement.click();
-      }
-      break;
+    if (action === 'upload') {
+      this.poFileInput.nativeElement.click();
+    }
 
-    case 'load':
-      // open Load PO modal
+    if (action === 'load') {
       this.openLoadPoModal();
-      break;
-
-    default:
-      console.warn('Unknown EDI action:', action);
-      break;
+    }
   }
-}
 
+
+  // ---------------------------
+  // UPLOAD PO
+  // ---------------------------
 
   onPoFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
 
-    if (!input.files || input.files.length === 0) {
-      return;
-    }
+    if (!input.files?.length) return;
 
     const file = input.files[0];
 
@@ -93,79 +88,69 @@ export class IntakeComponent implements OnInit {
 
     this.intakeService.uploadPo(file).subscribe({
       next: () => {
-        notify({
-          message: 'PO file uploaded successfully',
-          type: 'success',
-          displayTime: 3000,
-          position: { my: 'top center', at: 'top center', offset: '0 20' },
-        });
-
-        this.loading = false;
+        notify('PO file uploaded', 'success', 3000);
         this.loadIntakes();
-        input.value = '';
-      },
-      error: (err) => {
-        notify({
-          message: 'Failed to upload PO file',
-          type: 'error',
-          displayTime: 3000,
-          position: { my: 'top center', at: 'top center', offset: '0 20' },
-        });
-
         this.loading = false;
         input.value = '';
       },
+      error: () => {
+        notify('Upload failed', 'error', 3000);
+        this.loading = false;
+        input.value = '';
+      }
     });
   }
 
+
+  // ---------------------------
+  // LOAD PO POPUP FLOW
+  // ---------------------------
+
   openLoadPoModal() {
-  this.showLoadPoModal = true;
-  this.fetchAvailablePos();
-}
-
-closeLoadPoModal() {
-  this.showLoadPoModal = false;
-  this.selectedPo = null;
-}
-
-fetchAvailablePos() {
-  this.loadingPos = true;
-
-  this.intakeService.getAvailablePos().subscribe({
-    next: (data) => {
-      this.availablePos = data;
-      this.loadingPos = false;
-    },
-    error: () => {
-      notify('Failed to load available POs', 'error', 3000);
-      this.loadingPos = false;
-    }
-  });
-}
-
-onPoSelected(e: any) {
-  // single selection, pick first row
-  this.selectedPo = e.selectedRowsData[0] || null;
-}
-
-onLoadPoConfirm() {
-  if (!this.selectedPo) {
-    notify('Select a PO first', 'warning', 2000);
-    return;
+    this.showLoadPoModal = true;
+    this.fetchAvailablePos();
   }
 
-  // Pass only the ID
-  const poId = this.selectedPo.id;
+  closeLoadPoModal() {
+    this.showLoadPoModal = false;
+    this.selectedPo = null;
+  }
 
-  this.intakeService.loadPo(poId).subscribe({
-    next: () => {
-      notify('PO loaded successfully', 'success', 3000);
-      this.closeLoadPoModal();
-      this.loadIntakes(); // refresh main grid
-    },
-    error: () => {
-      notify('Failed to load PO', 'error', 3000);
+  fetchAvailablePos() {
+    this.loadingPos = true;
+
+    this.intakeService.getAvailablePos().subscribe({
+      next: data => {
+        this.availablePos = data;
+        this.loadingPos = false;
+      },
+      error: () => {
+        notify('Failed to load available POs', 'error', 3000);
+        this.loadingPos = false;
+      }
+    });
+  }
+
+  onPoSelected(po: any) {
+    this.selectedPo = po;
+  }
+
+  onLoadPoConfirm() {
+    if (!this.selectedPo) {
+      notify('Select a PO first', 'warning', 2000);
+      return;
     }
-  });
-}
+
+    this.intakeService.loadPo(this.selectedPo.id).subscribe({
+      next: () => {
+        notify('PO loaded successfully', 'success', 3000);
+        this.closeLoadPoModal();
+        this.loadIntakes();
+      },
+      error: () => {
+        notify('Failed to load PO', 'error', 3000);
+      }
+    });
+  }
+
 }

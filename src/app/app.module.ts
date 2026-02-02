@@ -28,6 +28,7 @@ import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { IntakeComponent } from './Pages/intake/intake.component';
+import { LoadPoPopupComponent } from './Pages/intake/load-po-popup/load-po-popup.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { IntakeComponent } from './Pages/intake/intake.component';
     SidebarComponent,
     MainLayoutComponent,
     IntakeComponent,
+    LoadPoPopupComponent,
   ],
   imports: [
     BrowserModule,

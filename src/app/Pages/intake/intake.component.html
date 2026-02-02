@@ -25,8 +25,11 @@
     <dxi-column dataField="id" caption="ID"></dxi-column>
     <dxi-column dataField="client" caption="Client"></dxi-column>
     <dxi-column dataField="fileName" caption="File"></dxi-column>
-    <dxi-column dataField="status" caption="Status"></dxi-column>
-    <dxi-column dataField="uploadedAt" caption="Uploaded"></dxi-column>
+    <!-- <dxi-column dataField="status" caption="Status"></dxi-column>
+    <dxi-column dataField="uploadedAt" caption="Uploaded"></dxi-column> -->
+    <dxi-column dataField="pltQty" caption="Pallet Qty"></dxi-column>
+    <dxi-column dataField="ctnQty" caption="Pallet Qty"></dxi-column>
+    <dxi-column datafield="transportLocations.locnCode" caption="From Location"></dxi-column>
 
   </dx-data-grid>
 
@@ -37,54 +40,13 @@
     accept="*"
     (change)="onPoFileSelected($event)" />
 
-  <dx-popup
-    [(visible)]="showLoadPoModal"
-    title="Load Purchase Order"
-    [showCloseButton]="true"
-    [dragEnabled]="false"
-    height="600"
-    width="1200">
-
-    <dx-load-panel
-      [visible]="loadingPos">
-    </dx-load-panel>
-
-    <div *dxTemplate="let data of 'content'">
-      <dx-data-grid
-        [dataSource]="availablePos"
-        height="450"
-        selectionMode="single"
-        (onSelectionChanged)="onPoSelected($event)"
-        [columnAutoWidth]="true"
-        [allowColumnResizing]="true"
-        [showBorders]="true">
-        
-        <dxo-selection mode="single"></dxo-selection>
-        <dxo-scrolling mode="virtual"></dxo-scrolling>
-
-        <dxi-column dataField="id" caption="PO #"></dxi-column>
-        <dxi-column dataField="client" caption="Client"></dxi-column>
-        <dxi-column dataField="reference" caption="Reference"></dxi-column>
-        <dxi-column dataField="status" caption="Status"></dxi-column>
-
-      </dx-data-grid>
-
-      <div class="load-po-footer">
-        <dx-button
-          text="Cancel"
-          stylingMode="outlined"
-          (onClick)="closeLoadPoModal()">
-        </dx-button>
-
-        <dx-button
-          text="Load PO"
-          type="default"
-          [disabled]="!selectedPo"
-          (onClick)="onLoadPoConfirm()">
-        </dx-button>
-      </div>
-    </div>
-
-  </dx-popup>
-
 </div>
+<app-load-po-popup
+  [visible]="showLoadPoModal"
+  [loadingPos]="loadingPos"
+  [availablePos]="availablePos"
+  [selectedPo]="selectedPo"
+  (close)="closeLoadPoModal()"
+  (poSelected)="onPoSelected($event)"
+  (confirmLoad)="onLoadPoConfirm()">
+</app-load-po-popup>

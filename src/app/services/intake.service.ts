@@ -26,8 +26,8 @@ export class IntakeService {
     return this.http.get<any[]>(ENDPOINTS.getLoadedPoFiles);
   }
 
-  loadPo(poId: number) {
-  return this.http.post('/api/intakes/load-po', { poId });
+  loadPo(id: number) {
+  return this.http.post(`${ENDPOINTS.loadPoFileId}/${id}`, {});
 }
 
 }
