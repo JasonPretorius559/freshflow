@@ -9,6 +9,7 @@ export const ENDPOINTS = {
   uploadPoFile : `${BASE_URL}/intakes/uploadPoFile`,
   getLoadedPoFiles: `${BASE_URL}/intakes/getLoadedPoFiles`,
   loadPoFileId: `${BASE_URL}/intakes/loadPoFile`,
+  EditIntake: `${BASE_URL}/intakes/EditIntake`,
 
 
 };

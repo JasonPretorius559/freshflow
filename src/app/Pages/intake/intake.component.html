@@ -1,5 +1,4 @@
 <div class="intake-page">
-
   <div class="edi-actions">
     <dx-drop-down-button
       text="EDI"
@@ -8,38 +7,46 @@
       [items]="ediOptions"
       displayExpr="text"
       keyExpr="id"
-      (onItemClick)="onEdiAction($event)">
+      (onItemClick)="onEdiAction($event)"
+    >
     </dx-drop-down-button>
+
+    <dx-button
+  text="Edit"
+  icon="edit"
+  type="default"
+  class="ml-10"
+  (onClick)="onEditClick()">
+</dx-button>
   </div>
 
   <dx-data-grid
+    #intakeGrid
     [dataSource]="intakes"
     [showBorders]="true"
     [columnAutoWidth]="true"
     [hoverStateEnabled]="true"
-    [loadPanel]="{ enabled: loading }">
+    [loadPanel]="{ enabled: loading }"
+    [selection]="{ mode: 'multiple', showCheckBoxesMode: 'always' }"
+    >
+   
 
     <dxo-paging [pageSize]="20"></dxo-paging>
     <dxo-sorting mode="multiple"></dxo-sorting>
 
-    <dxi-column dataField="id" caption="ID"></dxi-column>
-    <dxi-column dataField="client" caption="Client"></dxi-column>
-    <dxi-column dataField="fileName" caption="File"></dxi-column>
+    
+    <dxi-column dataField="id" caption="Intake ID"></dxi-column>
+    <dxi-column dataField="client" caption="Organisation"></dxi-column>
+    <dxi-column dataField="fileName" caption="Po Filename"></dxi-column>
     <!-- <dxi-column dataField="status" caption="Status"></dxi-column>
     <dxi-column dataField="uploadedAt" caption="Uploaded"></dxi-column> -->
-    <dxi-column dataField="pltQty" caption="Pallet Qty"></dxi-column>
-    <dxi-column dataField="ctnQty" caption="Pallet Qty"></dxi-column>
-    <dxi-column datafield="transportLocations.locnCode" caption="From Location"></dxi-column>
-
+    <dxi-column dataField="totalPallets" caption="Pallet Qty"></dxi-column>
+    <dxi-column dataField="fromLocation" caption="From Location"></dxi-column>
   </dx-data-grid>
 
-  <input
-    #poFileInput
-    type="file"
-    hidden
-    accept="*"
-    (change)="onPoFileSelected($event)" />
+  
 
+  <input #poFileInput type="file" hidden accept="*" (change)="onPoFileSelected($event)" />
 </div>
 <app-load-po-popup
   [visible]="showLoadPoModal"
@@ -48,5 +55,14 @@
   [selectedPo]="selectedPo"
   (close)="closeLoadPoModal()"
   (poSelected)="onPoSelected($event)"
-  (confirmLoad)="onLoadPoConfirm()">
+  (confirmLoad)="onLoadPoConfirm()"
+>
 </app-load-po-popup>
+
+
+<app-edit-intake
+  [visible]="showEditModalFlag"
+  [intake]="selectedIntake"
+  (close)="showEditModalFlag = false"
+  (save)="onIntakeUpdated($event)">
+</app-edit-intake>

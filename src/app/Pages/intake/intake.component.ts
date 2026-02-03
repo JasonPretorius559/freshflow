@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IntakeService } from '../../services/intake.service';
 import notify from 'devextreme/ui/notify';
+import { EditIntakeComponent } from '../../edit-intake/edit-intake.component';
+import { DxDataGridComponent } from 'devextreme-angular';
 
 @Component({
   selector: 'app-intake',
@@ -18,9 +20,13 @@ export class IntakeComponent implements OnInit {
   selectedPo: any = null;
   loadingPos = false;
 
+  selectedIntake: any = {};
+  showEditModalFlag = false;
+
   showLoadPoModal = false;
 
   @ViewChild('poFileInput') poFileInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('intakeGrid', { static: false }) intakeGrid!: DxDataGridComponent;
 
   ediOptions = [
     { id: 'load', text: 'Load PO' },
@@ -31,6 +37,7 @@ export class IntakeComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadIntakes();
+    this.intakes.forEach(i => i.selected = false);
   }
 
 
@@ -152,5 +159,40 @@ export class IntakeComponent implements OnInit {
       }
     });
   }
+
+  onEditClick() {
+  const selectedRows = this.intakeGrid.instance.getSelectedRowsData();
+ 
+  if (!selectedRows || selectedRows.length === 0) {
+    notify("Please Select an intake first", 'error', 3000)
+    return;
+  }else if (selectedRows.length > 1){
+    notify("Please Select a single row", 'error', 3000)
+    return
+  }
+
+  const selected = selectedRows[0];
+  const intakeId = selected.id;
+
+  // Call backend to get full details
+  this.intakeService.getIntakeById(intakeId).subscribe({
+    next: (data) => {
+      this.selectedIntake = data;
+      this.showEditModalFlag = true; // open modal
+    },
+    error: (err) => {
+      console.error('Failed to load intake:', err);
+      alert('Failed to load intake details.');
+    }
+  });
+
+}
+
+// Update intake when modal saves
+onIntakeUpdated(updated: any) {
+  const index = this.intakes.findIndex(i => i.id === updated.id);
+  if (index !== -1) this.intakes[index] = updated;
+  console.log('Updated intake:', updated);
+}
 
 }

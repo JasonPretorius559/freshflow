@@ -30,4 +30,8 @@ export class IntakeService {
   return this.http.post(`${ENDPOINTS.loadPoFileId}/${id}`, {});
 }
 
+  getIntakeById(id: number) {
+      return this.http.get(`${ENDPOINTS.EditIntake}/${id}`, {});
+  }
+
 }

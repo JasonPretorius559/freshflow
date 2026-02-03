@@ -1,0 +1,71 @@
+<dx-popup
+  [(visible)]="visible"
+  [showTitle]="true"
+  title="Edit Intake"
+  [height]="800"
+  [width]="1500"
+  (onHiding)="onClose()"
+>
+  <dxi-toolbar-item
+    widget="dxButton"
+    toolbar="bottom"
+    location="after"
+    [options]="{
+      text: 'Save',
+      type: 'success',
+      onClick: onSave.bind(this)
+    }">
+  </dxi-toolbar-item>
+  <dxi-toolbar-item
+    widget="dxButton"
+    toolbar="bottom"
+    location="after"
+    [options]="{
+      text: 'Cancel',
+      onClick: onClose.bind(this)
+    }">
+  </dxi-toolbar-item>
+
+  <div class="popup-content">
+    
+    <!-- Intake Info -->
+   <div class="intake-info">
+  <!-- Org / Client -->
+  <dx-text-box [(value)]="editIntake.client" [label]="'Org'"></dx-text-box>
+
+  <!-- PO Filename -->
+  <dx-text-box [(value)]="editIntake.fileName" [label]="'PO Filename'"></dx-text-box>
+
+  <!-- From Depot -->
+  <dx-text-box [(value)]="editIntake.fromLocation" [label]="'From Depot'"></dx-text-box>
+</div>
+
+
+
+    <!-- Pallets Grid -->
+    <dx-data-grid
+      [dataSource]="editIntake.pallets"
+      [showBorders]="true"
+      [columnAutoWidth]="false"
+      [allowColumnResizing]="false"
+      [allowColumnReordering]="true"
+      class="pallets-grid"
+      [width]="'100%'"
+      [height]="500"
+    >
+      <dxo-paging [pageSize]="10"></dxo-paging>
+      <dxo-sorting mode="multiple"></dxo-sorting>
+
+      <dxi-column dataField="sscc" caption="SSCC" [width]="180"></dxi-column>
+      <dxi-column dataField="cartonQty" caption="Cartons" dataType="number" [width]="120"></dxi-column>
+      <dxi-column dataField="palletQty" caption="Pallets" dataType="number" [width]="120"></dxi-column>
+      <dxi-column dataField="grade" caption="Grade" [width]="120"></dxi-column>
+      <dxi-column dataField="packType" caption="Pack Type" [width]="150"></dxi-column>
+      <dxi-column dataField="commodity" caption="Commodity" [width]="150"></dxi-column>
+      <dxi-column dataField="variety" caption="Variety" [width]="150"></dxi-column>
+      <dxi-column dataField="sequenceNo" caption="Seq No" dataType="number" [width]="120"></dxi-column>
+      <dxi-column dataField="origin" caption="Origin" [width]="150"></dxi-column>
+      <dxi-column dataField="destination" caption="Destination" [width]="200"></dxi-column>
+    </dx-data-grid>
+  </div>
+</dx-popup>
