@@ -29,18 +29,16 @@
   <div class="popup-content">
     
     <!-- Intake Info -->
-   <div class="intake-info">
-  <!-- Org / Client -->
-  <dx-text-box [(value)]="editIntake.client" [label]="'Org'"></dx-text-box>
+    <div class="intake-info">
+      <!-- Org / Client -->
+      <dx-text-box [(value)]="editIntake.client" [label]="'Org'" [readOnly]="true"></dx-text-box>
 
-  <!-- PO Filename -->
-  <dx-text-box [(value)]="editIntake.fileName" [label]="'PO Filename'"></dx-text-box>
+      <!-- PO Filename -->
+      <dx-text-box [(value)]="editIntake.fileName" [label]="'PO Filename'" [readOnly]="true"></dx-text-box>
 
-  <!-- From Depot -->
-  <dx-text-box [(value)]="editIntake.fromLocation" [label]="'From Depot'"></dx-text-box>
-</div>
-
-
+      <!-- From Depot -->
+      <dx-text-box [(value)]="editIntake.fromLocation" [label]="'From Depot'"></dx-text-box>
+    </div>
 
     <!-- Pallets Grid -->
     <dx-data-grid
@@ -56,16 +54,32 @@
       <dxo-paging [pageSize]="10"></dxo-paging>
       <dxo-sorting mode="multiple"></dxo-sorting>
 
+      <dxi-column caption="Actions" type="buttons" [width]="120">
+        <dxi-button 
+          text="Verify" 
+          [onClick]="onVerify">
+        </dxi-button>
+      </dxi-column>
+      <dxi-column dataField="id" [visible]="false"></dxi-column>
       <dxi-column dataField="sscc" caption="SSCC" [width]="180"></dxi-column>
       <dxi-column dataField="cartonQty" caption="Cartons" dataType="number" [width]="120"></dxi-column>
-      <dxi-column dataField="palletQty" caption="Pallets" dataType="number" [width]="120"></dxi-column>
+      <dxi-column dataField="palletQty" caption="Pallet QTY" dataType="number" [width]="120" [format]="'0.##'"></dxi-column>
       <dxi-column dataField="grade" caption="Grade" [width]="120"></dxi-column>
       <dxi-column dataField="packType" caption="Pack Type" [width]="150"></dxi-column>
       <dxi-column dataField="commodity" caption="Commodity" [width]="150"></dxi-column>
       <dxi-column dataField="variety" caption="Variety" [width]="150"></dxi-column>
       <dxi-column dataField="sequenceNo" caption="Seq No" dataType="number" [width]="120"></dxi-column>
       <dxi-column dataField="origin" caption="Origin" [width]="150"></dxi-column>
-      <dxi-column dataField="destination" caption="Destination" [width]="200"></dxi-column>
+      <dxi-column dataField="verified" caption="Verified" dataType="boolean" [width]="120"></dxi-column>
+      <dxi-column dataField="verifiedAt" caption="Verified At" dataType="datetime" [width]="180"></dxi-column>
+      <dxi-column dataField="verifiedBy" caption="Verified By" [width]="150"></dxi-column>
     </dx-data-grid>
   </div>
+
+  <dx-button
+    text="Save"
+    icon="save"
+    type="default"
+  >
+  </dx-button>
 </dx-popup>

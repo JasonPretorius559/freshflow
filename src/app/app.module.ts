@@ -19,7 +19,9 @@ import {
   DxDropDownButtonModule,
   DxLoadPanelModule,
   DxPopupModule,
-  DxCheckBoxModule  
+  DxCheckBoxModule,
+  
+ 
 } from 'devextreme-angular';
 
 import { LoginComponent } from './Pages/login/login.component';
@@ -30,7 +32,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { IntakeComponent } from './Pages/intake/intake.component';
 import { LoadPoPopupComponent } from './Pages/intake/load-po-popup/load-po-popup.component';
-import { EditIntakeComponent } from './edit-intake/edit-intake.component';
+import { EditIntakeComponent } from './Pages/intake/edit-intake/edit-intake.component';
+import { StockGridComponent } from './Pages/stock/stock.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,7 @@ import { EditIntakeComponent } from './edit-intake/edit-intake.component';
     IntakeComponent,
     LoadPoPopupComponent,
     EditIntakeComponent,
+    StockGridComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +64,9 @@ import { EditIntakeComponent } from './edit-intake/edit-intake.component';
     DxDropDownButtonModule,
     DxLoadPanelModule,
     DxPopupModule,
+    
+    
+    
     DxCheckBoxModule
      
   ],

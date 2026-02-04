@@ -13,7 +13,7 @@ export class SidebarComponent {
   menuItems = [
     { text: 'Dashboard', icon: 'home', path: '/dashboard' },
     { text: 'Intake', icon: 'plus', path: '/intakes' },
-    { text: 'Stock', icon: 'cardcontent', path: '/stock' },
+    { text: 'Stock', icon: 'cardcontent', path: '/stock-detailed' },
     { text: 'Dispatches', icon: 'export', path: '/dispatch' }
   ];
   constructor(private router: Router) {}

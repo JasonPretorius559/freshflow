@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subscription  } from 'rxjs';
 import ENDPOINTS from '../enviroment/endpoints';
 
 @Injectable({
@@ -33,5 +33,10 @@ export class IntakeService {
   getIntakeById(id: number) {
       return this.http.get(`${ENDPOINTS.EditIntake}/${id}`, {});
   }
+
+  verifyPallet(pallet: any): Observable<any>{
+  return this.http.post(`${ENDPOINTS.verifyPallet}` , pallet)
+    
+}
 
 }

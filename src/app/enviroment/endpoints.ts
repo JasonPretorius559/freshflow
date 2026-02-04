@@ -10,6 +10,7 @@ export const ENDPOINTS = {
   getLoadedPoFiles: `${BASE_URL}/intakes/getLoadedPoFiles`,
   loadPoFileId: `${BASE_URL}/intakes/loadPoFile`,
   EditIntake: `${BASE_URL}/intakes/EditIntake`,
+  verifyPallet: `${BASE_URL}/intakes/verifyPallet`
 
 
 };

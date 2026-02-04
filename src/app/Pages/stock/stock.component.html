@@ -1,0 +1,60 @@
+<div class="p-4">
+<h2 class="stock-heading">Stock Detailed Grid</h2>
+
+
+<dx-data-grid
+class="stock-grid"
+[dataSource]="records"
+[showBorders]="true"
+[rowAlternationEnabled]="true"
+[columnAutoWidth]="true"
+[remoteOperations]="true"
+[paging]="{ pageSize: pageSize }"
+[pager]="{ showPageSizeSelector: true, allowedPageSizes: [25,50,100,250], showInfo: true }"
+(onOptionChanged)="onOptionChanged($event)"
+[allowColumnReordering]="true"
+[allowColumnResizing]="true" 
+>
+<dxo-filter-row [visible]="true"></dxo-filter-row>
+<dxo-header-filter [visible]="true"></dxo-header-filter>
+
+
+<!-- Core -->
+<dxi-column dataField="id" caption="ID" width="90" visible="'false'"></dxi-column>
+<dxi-column dataField="sscc"></dxi-column>
+<dxi-column dataField="documentNo"></dxi-column>
+<dxi-column dataField="origDoc"></dxi-column>
+
+
+<!-- Client / Org -->
+<dxi-column dataField="clientCode"></dxi-column>
+<dxi-column dataField="orgzn"></dxi-column>
+<dxi-column dataField="destination"></dxi-column>
+
+
+<!-- Produce -->
+<dxi-column dataField="commodity"></dxi-column>
+<dxi-column dataField="variety"></dxi-column>
+<dxi-column dataField="subVariety"></dxi-column>
+<dxi-column dataField="grade"></dxi-column>
+<dxi-column dataField="packType"></dxi-column>
+
+
+<!-- Quantities -->
+<dxi-column dataField="cartonQty"></dxi-column>
+<dxi-column dataField="palletQty"></dxi-column>
+
+
+<!-- Dates -->
+<dxi-column dataField="intakeDate" dataType="date"></dxi-column>
+<dxi-column dataField="transactionDate" dataType="date"></dxi-column>
+
+
+<!-- Other -->
+<dxi-column dataField="farm"></dxi-column>
+<dxi-column dataField="prodGrp"></dxi-column>
+<dxi-column dataField="targMkt"></dxi-column>
+
+
+</dx-data-grid>
+</div>
