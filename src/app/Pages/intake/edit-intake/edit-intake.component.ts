@@ -52,12 +52,12 @@ onVerify = (e: any) => {
       console.log('Success response:', response);
       notify('Pallet verified and stock created', 'success', 3000);
       
-      // ✅ Update the pallet with response data
+      
       pallet.verified = response.verified;
       pallet.verifiedAt = response.verifiedAt;
       pallet.verifiedBy = response.verifiedBy;
       
-      // ✅ Force grid refresh to show updated data
+    
       e.component.refresh();
     },
     error: (err) => {
